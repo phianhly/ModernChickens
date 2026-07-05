@@ -1,6 +1,7 @@
 package com.setycz.chickens.menu;
 
 import com.setycz.chickens.blockentity.RoostBlockEntity;
+import com.setycz.chickens.config.ChickensConfigHolder;
 import com.setycz.chickens.item.ChickenItemHelper;
 import com.setycz.chickens.registry.ModMenuTypes;
 import net.minecraft.core.BlockPos;
@@ -121,7 +122,13 @@ public class RoostMenu extends AbstractContainerMenu {
 
         @Override
         public int getMaxStackSize(ItemStack stack) {
-            return 16;
+            int configured = ChickensConfigHolder.get().getMaxChickensPerRoost();
+            return Math.min(Math.max(1, configured), stack.getMaxStackSize());
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return Math.max(1, ChickensConfigHolder.get().getMaxChickensPerRoost());
         }
     }
 
