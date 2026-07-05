@@ -22,6 +22,16 @@ public class RoostConfig {
 	@RangeDouble(min = 0.01d, max = 100d)
 	public static double breederSpeed = 1d;
 
+	@Comment("Minimum number of items chickens can lay at once.")
+	@LangKey("config.roost.minRoostItemSize")
+	@Config.RangeInt(min = 1, max = 64)
+	public static int minRoostItemSize = 1;
+
+	@Comment("Maximum number of items chickens can lay at once.")
+	@LangKey("config.roost.maxRoostItemSize")
+	@Config.RangeInt(min = 1, max = 64)
+	public static int maxRoostItemSize = 3;
+
 	@Comment("Prevent vanilla chickens from laying eggs. Of interest to modpack makers only.")
 	public static boolean disableEggLaying = false;
 

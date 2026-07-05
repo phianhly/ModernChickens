@@ -28,3 +28,7 @@ config.roost.breederSpeed.tooltip=The speed multiplier for the breeder. Higher i
 config.roost.breederSpeed=Breeder speed
 config.roost.roostSpeed.tooltip=The speed multiplier for the roost. Higher is faster.
 config.roost.roostSpeed=Roost speed
+config.roost.minRoostItemSize.tooltip=Minimum number of items chickens can lay at once.
+config.roost.minRoostItemSize=Min roost item size
+config.roost.maxRoostItemSize.tooltip=Maximum number of items chickens can lay at once.
+config.roost.maxRoostItemSize=Max roost item size

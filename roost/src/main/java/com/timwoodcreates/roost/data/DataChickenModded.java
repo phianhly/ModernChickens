@@ -13,6 +13,7 @@ import com.setycz.chickens.handler.SpawnType;
 import com.setycz.chickens.item.ItemSpawnEgg;
 import com.setycz.chickens.registry.ChickensRegistry;
 import com.setycz.chickens.registry.ChickensRegistryItem;
+import com.timwoodcreates.roost.RoostConfig;
 import com.timwoodcreates.roost.RoostItems;
 
 import net.minecraft.entity.Entity;
@@ -202,7 +203,13 @@ public class DataChickenModded extends DataChicken {
 	@Override
 	public ItemStack createDropStack() {
 		ItemStack stack = chicken.createLayItem();
-		stack.setCount(gain >= 10 ? 3 : gain >= 5 ? 2 : 1);
+		int count = getDropCount();
+		if (gain >= 10) {
+			count *= 3;
+		} else if (gain >= 5) {
+			count *= 2;
+		}
+		stack.setCount(count);
 		return stack;
 	}
 
