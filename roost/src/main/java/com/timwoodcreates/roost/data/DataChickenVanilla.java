@@ -1,5 +1,4 @@
 package com.timwoodcreates.roost.data;
-package com.timwoodcreates.roost.data;
 
 import java.util.Arrays;
 import java.util.List;

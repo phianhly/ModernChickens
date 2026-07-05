@@ -203,12 +203,11 @@ public class DataChickenModded extends DataChicken {
 	@Override
 	public ItemStack createDropStack() {
 		ItemStack stack = chicken.createLayItem();
-		int count = getDropCount();
-		if (gain >= 10) {
-			count *= 3;
-		} else if (gain >= 5) {
-			count *= 2;
-		}
+		int count = (int) Math.round(Math.sqrt(gain));
+		if (count < 1) count = 1;
+		if (count > 4) count = 4;
+		if (count > RoostConfig.maxRoostItemSize) count = RoostConfig.maxRoostItemSize;
+		if (count < RoostConfig.minRoostItemSize) count = RoostConfig.minRoostItemSize;
 		stack.setCount(count);
 		return stack;
 	}

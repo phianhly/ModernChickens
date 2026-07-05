@@ -38,14 +38,14 @@ public class TileEntityRoost extends TileEntityChickenContainer {
 		}
 
 		if (oldStack.isEmpty()) {
-			setInventorySlotContents(CHICKEN_SLOT, newStack.splitStack(16));
+			setInventorySlotContents(CHICKEN_SLOT, newStack.splitStack(RoostConfig.maxChickensPerRoost));
 			markDirty();
 			playPutChickenInSound();
 			return true;
 		}
 
 		if (oldStack.isItemEqual(newStack) && ItemStack.areItemStackTagsEqual(oldStack, newStack)) {
-			int itemsAfterAdding = Math.min(oldStack.getCount() + newStack.getCount(), 16);
+			int itemsAfterAdding = Math.min(oldStack.getCount() + newStack.getCount(), RoostConfig.maxChickensPerRoost);
 			int itemsToAdd = itemsAfterAdding - oldStack.getCount();
 			if (itemsToAdd > 0) {
 				newStack.splitStack(itemsToAdd);
