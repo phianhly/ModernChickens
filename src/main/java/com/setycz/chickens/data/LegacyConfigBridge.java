@@ -129,6 +129,9 @@ public final class LegacyConfigBridge {
             writer.write(String.format(Locale.ROOT, "    B:enableFluidChickens=%s%n", general.isFluidChickensEnabled()));
             writer.write(String.format(Locale.ROOT, "    B:enableChemicalChickens=%s%n", general.isChemicalChickensEnabled()));
             writer.write(String.format(Locale.ROOT, "    B:enableGasChickens=%s%n", general.isGasChickensEnabled()));
+            writer.write(String.format(Locale.ROOT, "    I:minRoostItemSize=%d%n", general.getMinRoostItemSize()));
+            writer.write(String.format(Locale.ROOT, "    I:maxRoostItemSize=%d%n", general.getMaxRoostItemSize()));
+            writer.write(String.format(Locale.ROOT, "    I:maxChickensPerRoost=%d%n", general.getMaxChickensPerRoost()));
             writer.write("}\n\n");
 
             for (ChickensRegistryItem chicken : ordered) {
@@ -182,6 +185,9 @@ public final class LegacyConfigBridge {
             case "enableFluidChickens" -> props.setProperty("general.enableFluidChickens", value);
             case "enableChemicalChickens" -> props.setProperty("general.enableChemicalChickens", value);
             case "enableGasChickens" -> props.setProperty("general.enableGasChickens", value);
+            case "minRoostItemSize" -> props.setProperty("general.minRoostItemSize", value);
+            case "maxRoostItemSize" -> props.setProperty("general.maxRoostItemSize", value);
+            case "maxChickensPerRoost" -> props.setProperty("general.maxChickensPerRoost", value);
             default -> {
             }
         }

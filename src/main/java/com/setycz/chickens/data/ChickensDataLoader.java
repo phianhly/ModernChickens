@@ -694,6 +694,20 @@ public final class ChickensDataLoader {
                 readInt(props, "general.incubatorMaxReceive", 4_000), 1);
         int incubatorEnergyCost = ensurePositive(props, "general.incubatorEnergyCost",
                 readInt(props, "general.incubatorEnergyCost", 10_000), 1);
+        int minRoostItemSize = ensurePositive(props, "general.minRoostItemSize",
+                readInt(props, "general.minRoostItemSize", 1), 1);
+        int maxRoostItemSize = ensurePositive(props, "general.maxRoostItemSize",
+                readInt(props, "general.maxRoostItemSize", 3), 1);
+        if (maxRoostItemSize < minRoostItemSize) {
+            maxRoostItemSize = minRoostItemSize;
+            props.setProperty("general.maxRoostItemSize", Integer.toString(maxRoostItemSize));
+        }
+        int maxChickensPerRoost = ensurePositive(props, "general.maxChickensPerRoost",
+                readInt(props, "general.maxChickensPerRoost", 16), 1);
+        if (maxChickensPerRoost > 64) {
+            maxChickensPerRoost = 64;
+            props.setProperty("general.maxChickensPerRoost", Integer.toString(maxChickensPerRoost));
+        }
         return new ChickensConfigValues(spawnProbability, minBroodSize, maxBroodSize, multiplier,
                 overworldChance, netherChance, endChance, alwaysShowStats,
                 roostSpeed, breederSpeed, roosterAuraMultiplier, roosterAuraRange,
@@ -704,7 +718,8 @@ public final class ChickensDataLoader {
                 avianChemicalCapacity, avianChemicalTransfer, avianChemicalEffects,
                 liquidEggHazards,
                 fluidChickensEnabled, chemicalChickensEnabled, gasChickensEnabled, incubatorEnergyCost,
-                incubatorCapacity, incubatorMaxReceive);
+                incubatorCapacity, incubatorMaxReceive,
+                minRoostItemSize, maxRoostItemSize, maxChickensPerRoost);
     }
 
     private static String readString(Properties props, String key, String defaultValue) {

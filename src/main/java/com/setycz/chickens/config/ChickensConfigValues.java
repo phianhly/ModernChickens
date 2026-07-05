@@ -47,6 +47,9 @@ public final class ChickensConfigValues {
     private final int incubatorEnergyCost;
     private final int incubatorEnergyCapacity;
     private final int incubatorEnergyMaxReceive;
+    private final int minRoostItemSize;
+    private final int maxRoostItemSize;
+    private final int maxChickensPerRoost;
 
     public ChickensConfigValues(int spawnProbability, int minBroodSize, int maxBroodSize,
             float netherSpawnChanceMultiplier, float overworldSpawnChance,
@@ -61,7 +64,8 @@ public final class ChickensConfigValues {
             int avianChemicalCapacity, int avianChemicalTransferRate, boolean avianChemicalEffectsEnabled,
             boolean liquidEggHazardsEnabled, boolean fluidChickensEnabled,
             boolean chemicalChickensEnabled, boolean gasChickensEnabled, int incubatorEnergyCost,
-            int incubatorEnergyCapacity, int incubatorEnergyMaxReceive) {
+            int incubatorEnergyCapacity, int incubatorEnergyMaxReceive,
+            int minRoostItemSize, int maxRoostItemSize, int maxChickensPerRoost) {
         this.spawnProbability = spawnProbability;
         this.minBroodSize = minBroodSize;
         this.maxBroodSize = maxBroodSize;
@@ -96,6 +100,9 @@ public final class ChickensConfigValues {
         this.incubatorEnergyCost = incubatorEnergyCost;
         this.incubatorEnergyCapacity = incubatorEnergyCapacity;
         this.incubatorEnergyMaxReceive = incubatorEnergyMaxReceive;
+        this.minRoostItemSize = minRoostItemSize;
+        this.maxRoostItemSize = maxRoostItemSize;
+        this.maxChickensPerRoost = maxChickensPerRoost;
     }
 
     public int getSpawnProbability() {
@@ -249,5 +256,17 @@ public final class ChickensConfigValues {
 
     public int getIncubatorEnergyMaxReceive() {
         return incubatorEnergyMaxReceive;
+    }
+
+    public int getMinRoostItemSize() {
+        return minRoostItemSize;
+    }
+
+    public int getMaxRoostItemSize() {
+        return maxRoostItemSize;
+    }
+
+    public int getMaxChickensPerRoost() {
+        return maxChickensPerRoost;
     }
 }

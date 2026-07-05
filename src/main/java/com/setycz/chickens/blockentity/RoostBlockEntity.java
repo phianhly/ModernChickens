@@ -32,10 +32,13 @@ import java.util.List;
 public class RoostBlockEntity extends AbstractChickenContainerBlockEntity {
     public static final int INVENTORY_SIZE = 5;
     public static final int CHICKEN_SLOT = 0;
-    private static final int MAX_CHICKENS = 16;
 
     public RoostBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ROOST.get(), pos, state, INVENTORY_SIZE, 1);
+    }
+
+    private static int maxChickensPerSlot() {
+        return Math.max(1, ChickensConfigHolder.get().getMaxChickensPerRoost());
     }
 
     @Override
@@ -45,6 +48,10 @@ public class RoostBlockEntity extends AbstractChickenContainerBlockEntity {
             return;
         }
         ItemStack item = entry.createLay(random);
+        int min = Math.max(1, ChickensConfigHolder.get().getMinRoostItemSize());
+        int max = Math.max(min, ChickensConfigHolder.get().getMaxRoostItemSize());
+        int clamped = Math.min(max, Math.max(min, item.getCount()));
+        item.setCount(clamped);
         ItemStack remaining = pushIntoOutput(item);
         if (!remaining.isEmpty() && level != null) {
             Containers.dropItemStack(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), remaining);
@@ -137,7 +144,7 @@ public class RoostBlockEntity extends AbstractChickenContainerBlockEntity {
     @Override
     protected int getMaxStackSizeForSlot(int slot, ItemStack stack) {
         if (slot == CHICKEN_SLOT) {
-            return Math.min(MAX_CHICKENS, stack.getMaxStackSize());
+            return Math.min(maxChickensPerSlot(), stack.getMaxStackSize());
         }
         return super.getMaxStackSizeForSlot(slot, stack);
     }
@@ -148,7 +155,7 @@ public class RoostBlockEntity extends AbstractChickenContainerBlockEntity {
         }
         ItemStack current = getItem(CHICKEN_SLOT);
         if (current.isEmpty()) {
-            int toMove = Math.min(MAX_CHICKENS, newStack.getCount());
+            int toMove = Math.min(maxChickensPerSlot(), newStack.getCount());
             if (toMove <= 0) {
                 return false;
             }
@@ -159,7 +166,7 @@ public class RoostBlockEntity extends AbstractChickenContainerBlockEntity {
         if (!ItemStack.isSameItemSameComponents(current, newStack)) {
             return false;
         }
-        int space = MAX_CHICKENS - current.getCount();
+        int space = maxChickensPerSlot() - current.getCount();
         if (space <= 0) {
             return false;
         }
